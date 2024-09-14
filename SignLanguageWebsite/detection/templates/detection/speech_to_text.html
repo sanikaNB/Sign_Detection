@@ -1,0 +1,51 @@
+<!-- speech_to_text.html -->
+<!-- detection/speech_to_text.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <title>Speech to Text</title>
+    <style>
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.7);
+            overflow: hidden;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+<div class="navbar">
+        <a href="/">Home</a>
+        <a href="/learn">Learn</a>
+        <a href="/speech_to_sign">Speech to Sign</a>
+    </div>
+    <h1>Convert Speech to Text</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" name="speak">Start Speaking</button>
+        <br><br>
+        <input type="text" name="text_input" placeholder="Or enter text here">
+        <button type="submit" name="submit_text">Submit Text</button>
+    </form>
+    {% if text %}
+        <h2>Text: {{ text }}</h2>
+        <div>
+            {% for image in images %}
+                <img id="signImage" src="{% static image%}" width="300" height="300" alt="Sign Image">
+            {% endfor %}
+        </div>
+    {% endif %}
+</body>
+</html>
+
